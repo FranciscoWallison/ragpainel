@@ -23,7 +23,7 @@ class AuthenticatedSessionController extends Controller
     {
 
         if (Auth::check()) {
-            return redirect()->route('index');
+            return  redirect('/');
         }
 
         return view('user.login');
@@ -54,7 +54,7 @@ class AuthenticatedSessionController extends Controller
         $id = User::where('userid', $request->input('userid'))->where('user_pass', $request->input('password'))->first();
 
         if(is_null($id)){
-            return back()->with('custom_alert', 'Essa conta não existe.');
+            return back()->with('custom_alert', 'Usuário e/ou senha inválido.');
         }
 
         if($id->state > 0){
@@ -65,8 +65,6 @@ class AuthenticatedSessionController extends Controller
             Auth::loginUsingId($id->account_id, $remember);
             $request->session()->regenerate();
             return redirect()->route('index');
-        } else {
-            return back()->with('custom_alert', 'E-mail e/ou senha incorretos.');
         }
 
     }

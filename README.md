@@ -202,9 +202,6 @@ $ git clone https://github.com/rscodexx/ragpainel.git
 
 # Ou baixe o projeto direto do repositório: https://github.com/rscodexx/ragpainel
 
-# Importe o arquivo ragnarok.sql no banco de dados do seu servidor que está em:
-$ ragpainel\database\seeders\sql-files
-
 # Renomeie o arquivo .env-example(está na pasta raiz do projeto) para .env e configure.
 
 DB_CONNECTION=mysql #Tipo de banco de dados.
@@ -223,7 +220,12 @@ $ cd ragpainel
 # Após entrar no diretório do projeto instale o composer e suas dependências.
 $ composer install
 
-# Aguarde a instalação e pronto, seu servidor já está configurado para rodar o projeto.
+# Aguarde a instalação.
+
+# Instale as tabelas do painel, ainda com cmd aberto no diretório do projeto utilize:
+$ php artisan migrate
+
+# Pronto, o seu servidor está instalado e configurado.
 
 ```
 

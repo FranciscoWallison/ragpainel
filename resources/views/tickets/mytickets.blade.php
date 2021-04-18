@@ -97,8 +97,8 @@
                             @elseif($ticket->status == "Resolvido")
                                 <td><button class="btn btn-danger btn-xs">{{$ticket->status}}</button></td>
                             @endif
-                            <td>{{date('d-m-Y', strtotime($ticket->created_at))}} às {{date('H:m:i', strtotime($ticket->created_at))}}</td>
-                            <td>{{date('d-m-Y', strtotime($ticket->updated_at))}} às {{date('H:m:i', strtotime($ticket->updated_at))}}</td>
+                            <td>{{date('d-m-Y', strtotime($ticket->created_at))}} às {{date('H:i:s', strtotime($ticket->created_at))}}</td>
+                            <td>{{date('d-m-Y', strtotime($ticket->updated_at))}} às {{date('H:i:s', strtotime($ticket->updated_at))}}</td>
                             <form method="get" action="{{route('tickets.ticketview', ['id' => $ticket->id])}}">
                                 @csrf
                             <td><button type="submit" class="btn btn-{{$configs['color']}} btn-xs">Visualizar</button></td>

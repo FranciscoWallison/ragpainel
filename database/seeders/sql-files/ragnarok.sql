@@ -32,7 +32,7 @@ CREATE TABLE `tickets` (
 `id` int(11) NOT NULL,
 `title` varchar(24) NOT NULL,
 `login` varchar(24) NOT NULL,
-`email` varchar(39) NOT NULL default '',
+`email` varchar(100) NOT NULL default '',
 `category` varchar(24) NOT NULL,
 `body` text NOT NULL,
 `tickets` varchar(24) NOT NULL DEFAULT 'Aberto',
@@ -78,7 +78,7 @@ INSERT INTO `painel_configs` (`id`, `name`, `content`) VALUES
 (5, 'facebook', 'https://www.facebook.com/'),
 (7, 'color', 'purple'),
 (8, 'colorbg', 'black'),
-(9, 'levelvip', '10'),
+(9, 'levelvip', '5'),
 (10, 'leveladm', '99'),
 (11, 'levelgm', '50'),
 (12, 'levelcm', '20');

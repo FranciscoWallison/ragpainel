@@ -34,7 +34,7 @@
                         @php echo nl2br($ticket[0]->body); @endphp
                     </div>
                     <h6>
-                        <i class="ti-time"></i> Criado em {{date('d-m-Y', strtotime($ticket[0]->created_at))}} às {{date('H:m:i', strtotime($ticket[0]->created_at))}}
+                        <i class="ti-time"></i> Criado em {{date('d-m-Y', strtotime($ticket[0]->created_at))}} às {{date('H:i:s', strtotime($ticket[0]->created_at))}}
                     </h6>
                 </div>
             </li>

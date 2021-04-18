@@ -107,7 +107,7 @@
                             <div class="col-md-10">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Dias de VIP</label>
-                                    <input type="text" class="form-control" value="{{$cash}}" disabled>
+                                    <input type="text" class="form-control" value="{{$daysvip}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                             <div class="col-md-10">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Créditos</label>
-                                    <input type="text" class="form-control" value="{{$daysvip}} CashPoints" disabled>
+                                    <input type="text" class="form-control" value="{{$cash}} CashPoints" disabled>
                                 </div>
                             </div>
                         </div>

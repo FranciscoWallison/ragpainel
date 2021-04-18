@@ -88,8 +88,8 @@
                                                         <td>{{$att->title}}</td>
                                                         <td>{{$att->category}}</td>
                                                         <td><button class="btn btn-success btn-xs">{{$att->status}}</button></td>
-                                                        <td>{{date('d-m-Y', strtotime($att->created_at))}} às {{date('H:m:i', strtotime($att->created_at))}}</td>
-                                                        <td>{{date('d-m-Y', strtotime($att->updated_at))}} às {{date('H:m:i', strtotime($att->updated_at))}}</td>
+                                                        <td>{{date('d-m-Y', strtotime($att->created_at))}} às {{date('H:i:s', strtotime($att->created_at))}}</td>
+                                                        <td>{{date('d-m-Y', strtotime($att->updated_at))}} às {{date('H:i:s', strtotime($att->updated_at))}}</td>
                                                         <td>
                                                             <form method="get" action="{{route('admin.managertickets.view', ['id' => $att->id])}}">
                                                                 <button type="submit" class="btn btn-{{$configs['color']}} btn-xs">Visualizar</button>

@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('title', 'Ranking de MVPs')
-@section('description', 'Ranking de MVPs')
+@section('title', 'Ranking de Eventos')
+@section('description', 'Ranking de Eventos')
 
 @section('content')
 
@@ -10,7 +10,7 @@
             <i class="material-icons">emoji_events</i>
         </div>
         <div class="card-content">
-            <h4 class="card-title">TOP <b>50</b> melhores matadores de MVPs</h4>
+            <h4 class="card-title">TOP <b>50</b> ganhadores de eventos</h4>
             <div class="table-responsive tablecenter color-{{$configs['color']}}">
                 <table class="table">
                     <thead class="text-primary">

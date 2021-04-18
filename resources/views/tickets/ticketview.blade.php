@@ -86,7 +86,7 @@
                             @php echo nl2br($reply->body); @endphp
                         </div>
                         <h6>
-                            Criado em {{date('d-m-Y', strtotime($reply->created_at))}} às {{date('H:m:i', strtotime($reply->created_at))}}
+                            Criado em {{date('d-m-Y', strtotime($reply->created_at))}} às {{date('H:i:s', strtotime($reply->created_at))}}
                         </h6>
                     </div>
                 </li>
