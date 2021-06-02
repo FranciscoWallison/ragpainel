@@ -22,11 +22,7 @@ class DatabaseController extends Controller
 {
     public function item(Request $request)
     {
-
-        $page = $request->has('page') ? $request->get('page') : 1;
-        $limit = $request->has('limit') ? $request->get('limit') : 10;
-
-        $itens = Item::limit($limit)->offset(($page - 1) * $limit)->paginate();
+        $itens = Item::paginate();
 
         if(Auth::check()) {
             return view('database.item', [
@@ -62,7 +58,8 @@ class DatabaseController extends Controller
                 ->withInput();
         }
 
-            $name = Item::where('name_japanese', 'like', '%' .$request->input('itemSearch') . '%')->paginate();
+            $name = Item::where('name_japanese', 'LIKE', '%' .$request->input('itemSearch'). '%')
+            ->orWhere('id', 'LIKE', '%' .$request->input('itemSearch') . '%')->paginate();
 
             if($name){
                 $find = $name;
@@ -145,11 +142,7 @@ class DatabaseController extends Controller
 
     public function monster(Request $request)
     {
-
-        $page = $request->has('page') ? $request->get('page') : 1;
-        $limit = $request->has('limit') ? $request->get('limit') : 10;
-
-        $monsters = Monster::limit($limit)->offset(($page - 1) * $limit)->paginate();
+        $monsters = Monster::paginate();
 
         if(Auth::check()) {
             return view('database.monster', [
@@ -234,7 +227,8 @@ class DatabaseController extends Controller
                 ->withInput();
         }
 
-        $name = Monster::where('iName', 'like', '%' .$request->input('monsterSearch') . '%')->paginate();
+        $name = Monster::where('iName', 'LIKE', '%' .$request->input('monsterSearch'). '%')
+            ->orWhere('id', 'LIKE', '%' .$request->input('monsterSearch') . '%')->paginate();
 
         if($name){
             $find = $name;
