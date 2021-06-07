@@ -22,9 +22,6 @@ class MyChars extends Controller
 
         return view('user.mychars', [
             'job' => $this->job(),
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'chars' => $chars,
         ]);
     }
