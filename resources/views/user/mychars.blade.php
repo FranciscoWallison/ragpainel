@@ -20,6 +20,16 @@
         </div>
     @endif
 
+    @empty($chars)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <span>Nenhum Personagem Encontrado</span>
+                </div>
+            </div>
+        </div>
+    @endempty
+
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12">
