@@ -45,6 +45,7 @@
                                 <thead class="text-primary">
                                 <th>Nome</th>
                                 <th>Level</th>
+                                <th>Classe</th>
                                 <th>Mapa</th>
                                 <th>Clãn</th>
                                 <th>Ações</th>
@@ -55,6 +56,7 @@
 
                                     <td>{{$char->char_name}}</td>
                                     <td>{{$char->base_level}}/{{$char->job_level}}</td>
+                                    <td>{{$job[$char->class]}}</td>
                                     <td>{{$char->last_map}}</td>
                                     <td>@empty($char->guild_name) Nenhum @else{{$char->guild_name}} @endempty</td>
                                     <td>
