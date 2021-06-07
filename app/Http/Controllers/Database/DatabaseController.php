@@ -13,6 +13,7 @@ use App\Models\Guild;
 use App\Models\RankingPVP;
 use App\Models\RankingGVG;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Contracts\DataTable;
 use App\Models\Item;
@@ -22,27 +23,17 @@ class DatabaseController extends Controller
 {
     public function item(Request $request)
     {
-        $itens = Item::paginate();
-
-        if(Auth::check()) {
-            return view('database.item', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
-                'type_itens' => $this->type(),
-                'equipIn' => $this->equip(),
-                'itens' => $itens
-            ]);
+        if(Schema::hasTable('item_db')) {
+            $itens = Item::paginate();
         } else {
+            $itens = [];
+        }
+
             return view('database.item', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
                 'type_itens' => $this->type(),
                 'equipIn' => $this->equip(),
                 'itens' => $itens
             ]);
-        }
 
     }
 
