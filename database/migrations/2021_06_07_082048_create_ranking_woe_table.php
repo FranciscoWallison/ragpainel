@@ -19,7 +19,7 @@ class CreateRankingWoeTable extends Migration
             $table->string('guild_name', 50);
             $table->integer('killed', false, true);
             $table->integer('died', false, true);
-            $table->integer('poing');
+            $table->integer('point');
             $table->timestamps();
         });
     }

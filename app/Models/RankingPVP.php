@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RankingPVP extends Model
 {
 
-    protected $table = 'arena_pvp';
+    protected $table = 'ranking_pvp';
 
     protected $primaryKey = 'char_id';
 
