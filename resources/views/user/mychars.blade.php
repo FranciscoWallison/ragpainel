@@ -56,7 +56,7 @@
                                     <td>{{$char->char_name}}</td>
                                     <td>{{$char->base_level}}/{{$char->job_level}}</td>
                                     <td>{{$char->last_map}}</td>
-                                    <td>{{$char->guild_name}}</td>
+                                    <td>@empty($char->guild_name) Nenhum @else{{$char->guild_name}} @endempty</td>
                                     <td>
 
                                         <form class="form-inline" action="{{route('user.resetposition', ['id' => $char->charid])}}" method="post">
