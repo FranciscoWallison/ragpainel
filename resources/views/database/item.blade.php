@@ -53,7 +53,7 @@
                         </div>
                     <thead>
                     <tr>
-                        @if($itens == '')
+                        @if(count($itens) == 0)
                             <p class="justify-content: text-center">Nenhum item encontrado.</p>
                         @else
                         <th>ID</th>

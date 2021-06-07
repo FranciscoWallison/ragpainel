@@ -53,7 +53,7 @@
                     </div>
                     <thead>
                     <tr>
-                        @if($monsters == '')
+                        @if(count($monsters) == 0)
                             <p class="justify-content: text-center">Nenhum monstro encontrado.</p>
                         @else
                         <th>ID</th>

@@ -56,25 +56,11 @@ class DatabaseController extends Controller
                 $find = $name;
             }
 
-            if (Auth::check()) {
                 return view('database.item', [
-                    'user' => $request->user()->userid,
-                    'photo' => $request->user()->photo,
-                    'level' => $request->user()->group_id,
                     'type_itens' => $this->type(),
                     'equipIn' => $this->equip(),
                     'itens' => $find,
                 ]);
-            } else {
-                return view('database.item', [
-                    'user' => null,
-                    'photo' => null,
-                    'level' => null,
-                    'type_itens' => $this->type(),
-                    'equipIn' => $this->equip(),
-                    'itens' => $find
-                ]);
-            }
 
     }
 
@@ -139,30 +125,12 @@ class DatabaseController extends Controller
         } else {
             $monsters = [];
         }
-
-        if(Auth::check()) {
             return view('database.monster', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'monster_size' => $this->size(),
                 'monster_element' => $this->element(),
                 'monster_race' => $this->race(),
                 'monsters' => $monsters,
             ]);
-        } else {
-            return view('database.monster', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'type_itens' => $this->type(),
-                'monster_size' => $this->size(),
-                'monster_element' => $this->element(),
-                'monster_race' => $this->race(),
-                'monsters' => $monsters,
-            ]);
-        }
-
     }
 
     public function size(){
@@ -224,33 +192,14 @@ class DatabaseController extends Controller
         }
 
         $name = Monster::where('iName', 'LIKE', '%' .$request->input('monsterSearch'). '%')
-            ->orWhere('id', 'LIKE', '%' .$request->input('monsterSearch') . '%')->paginate();
+            ->orWhere('id', 'LIKE', '%' .$request->input('monsterSearch'). '%')->paginate();
 
-        if($name){
-            $find = $name;
-        }
-
-        if (Auth::check()) {
             return view('database.monster', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'monster_size' => $this->size(),
                 'monster_element' => $this->element(),
                 'monster_race' => $this->race(),
-                'monsters' => $find,
+                'monsters' => $name,
             ]);
-        } else {
-            return view('database.monster', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'monster_size' => $this->size(),
-                'monster_element' => $this->element(),
-                'monster_race' => $this->race(),
-                'monsters' => $find
-            ]);
-        }
 
     }
 }
