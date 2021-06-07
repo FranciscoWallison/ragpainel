@@ -20,7 +20,7 @@ class CreateTicketsTable extends Migration
             $table->string('email', 100);
             $table->string('category', 40);
             $table->text('body');
-            $table->string('status', 24);
+            $table->string('status', 24)->default('Aberto');
             $table->timestamps();
         });
     }
