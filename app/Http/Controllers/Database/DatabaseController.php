@@ -133,7 +133,12 @@ class DatabaseController extends Controller
 
     public function monster(Request $request)
     {
-        $monsters = Monster::paginate();
+
+        if(Schema::hasTable('mob_db')) {
+            $monsters = Monster::paginate();
+        } else {
+            $monsters = [];
+        }
 
         if(Auth::check()) {
             return view('database.monster', [

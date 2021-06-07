@@ -31,6 +31,15 @@
         <div class="card-content">
             <h4 class="card-title">Database de Monstros</h4>
             <div class="material-datatables tablecentericon">
+                @if($monsters == null)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <span>Tabela <strong>mob_db</strong> não foi encontrada, importe em seu banco de dados para visualizar os monstros.</span>
+                            </div>
+                        </div>
+                    </div>
+                @else
                 <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                     <div class="col-md-3 col-md-offset-9">
                         <div class="form-group label-floating">
@@ -104,7 +113,8 @@
                     </tbody>
 
                 </table>
-                <div class="text-right"> {{$monsters->links("pagination::bootstrap-4")}} </div>
+                @endif
+                <div class="text-right">@if($monsters != null) {{$monsters->links("pagination::bootstrap-4")}} @endif</div>
             </div>
         </div>
     </div>
