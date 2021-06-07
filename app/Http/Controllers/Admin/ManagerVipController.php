@@ -71,7 +71,7 @@ class ManagerVipController extends Controller
         $user = User::where('userid', $request->input('login'))->first();
 
         if($user) {
-            $user->vip_time -= $request->vipremove*86400000;
+            $user->vip_time -= $request->vipremove*864000;
             if($user->vip_time <= 1){
                 $user->group_id = 0;
             }
