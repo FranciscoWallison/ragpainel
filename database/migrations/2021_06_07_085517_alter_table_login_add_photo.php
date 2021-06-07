@@ -14,7 +14,7 @@ class AlterTableLoginAddPhoto extends Migration
     public function up()
     {
         Schema::table('login', function (Blueprint $table) {
-            $table->string('photo', 200)->after('remember_token')->nullable();
+            $table->string('photo', 200)->after('remember_token')->default('default.png')->nullable();
         });
     }
 
