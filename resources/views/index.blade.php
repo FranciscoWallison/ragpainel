@@ -96,6 +96,9 @@
                             @php $np++; @endphp
                         </tr>
                         @endforeach
+                        @if($np == null)
+                            <tr><td colspan="4">Nenhum Jogador Encontrado</td></tr>
+                        @endempty
 
                     </tbody>
                 </table>
@@ -125,6 +128,9 @@
                             @php $nw++; @endphp
                         </tr>
                     @endforeach
+                    @if($nw == null)
+                        <tr><td colspan="4">Nenhum Jogador Encontrado</td></tr>
+                    @endempty
                     </tbody>
                 </table>
             </div>
@@ -153,6 +159,9 @@
                             @php $nm++; @endphp
                         </tr>
                     @endforeach
+                    @if($nm == null)
+                        <tr><td colspan="4">Nenhum Jogador Encontrado</td></tr>
+                    @endempty
                     </tbody>
                 </table>
             </div>
