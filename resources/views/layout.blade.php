@@ -44,11 +44,11 @@
             <div class="user">
                 @if(Auth::check())
                 <div class="photo">
-                    <img src="{{asset('assets/img/users')}}/{{$photo}}" />
+                    <img src="{{asset('assets/img/users')}}/{{\Auth::user()->photo}}" />
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                        {{ucfirst(trans($user))}}
+                        {{ucfirst(trans(\Auth::user()->userid))}}
                         <b class="caret"></b>
                     </a>
                     <div class="collapse" id="collapseExample">
@@ -81,40 +81,42 @@
                         <p>Início</p>
                     </a>
                 </li>
-                @if($level == $configs['leveladm'])
-                <li class="{{ (request()->is('admin/*')) ? 'active' : '' }}">
-                    <a data-toggle="collapse" href="#pagesExamples">
-                        <i class="material-icons">security</i>
-                        <p>Administração
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li class="{{ (request()->is('admin/logs')) ? 'active' : '' }}">
-                                <a href="{{route('admin.logs')}}">Visualizar Logs</a>
-                            </li>
-                            <li class="{{ (request()->is('admin/managercash')) ? 'active' : '' }}">
-                                <a href="{{route('admin.managercash')}}">Gerenciar Créditos</a>
-                            </li>
-                            <li class="{{ (request()->is('admin/managervip')) ? 'active' : '' }}">
-                                <a href="{{route('admin.managervip')}}">Gerenciar VIP</a>
-                            </li>
-                            <li class="{{ (request()->is('admin/managerstaff')) ? 'active' : '' }}">
-                                <a href="{{route('admin.managerstaff')}}">Gerenciar Equipe</a>
-                            </li>
-                            <li class="{{ (request()->is('admin/managerban')) ? 'active' : '' }}">
-                                <a href="{{route('admin.managerban')}}">Gerenciar Banimentos</a>
-                            </li>
-                            <li class="{{ (request()->is('admin/managertickets')) ? 'active' : '' }}">
-                                <a href="{{route('admin.managertickets')}}">Gerenciar Tickets</a>
-                            </li>
-                            <li class="{{ (request()->is('admin/configs')) ? 'active' : '' }}">
-                                <a href="{{route('admin.config')}}">Configurações do Painel</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @if(Auth::check())
+                    @if(\Auth::user()->group_id == $configs['leveladm'])
+                    <li class="{{ (request()->is('admin/*')) ? 'active' : '' }}">
+                        <a data-toggle="collapse" href="#pagesExamples">
+                            <i class="material-icons">security</i>
+                            <p>Administração
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="pagesExamples">
+                            <ul class="nav">
+                                <li class="{{ (request()->is('admin/logs')) ? 'active' : '' }}">
+                                    <a href="{{route('admin.logs')}}">Visualizar Logs</a>
+                                </li>
+                                <li class="{{ (request()->is('admin/managercash')) ? 'active' : '' }}">
+                                    <a href="{{route('admin.managercash')}}">Gerenciar Créditos</a>
+                                </li>
+                                <li class="{{ (request()->is('admin/managervip')) ? 'active' : '' }}">
+                                    <a href="{{route('admin.managervip')}}">Gerenciar VIP</a>
+                                </li>
+                                <li class="{{ (request()->is('admin/managerstaff')) ? 'active' : '' }}">
+                                    <a href="{{route('admin.managerstaff')}}">Gerenciar Equipe</a>
+                                </li>
+                                <li class="{{ (request()->is('admin/managerban')) ? 'active' : '' }}">
+                                    <a href="{{route('admin.managerban')}}">Gerenciar Banimentos</a>
+                                </li>
+                                <li class="{{ (request()->is('admin/managertickets')) ? 'active' : '' }}">
+                                    <a href="{{route('admin.managertickets')}}">Gerenciar Tickets</a>
+                                </li>
+                                <li class="{{ (request()->is('admin/configs')) ? 'active' : '' }}">
+                                    <a href="{{route('admin.config')}}">Configurações do Painel</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    @endif
                 @endif
                 <li class="{{ (request()->is('rankings/*')) ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#componentsExamples">

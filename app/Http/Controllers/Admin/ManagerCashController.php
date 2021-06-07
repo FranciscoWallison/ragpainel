@@ -20,9 +20,6 @@ class ManagerCashController extends Controller
     public function index(Request $request)
     {
         return view('admin.managercash', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'findcash' => null,
             'findlogin' => null
         ]);
@@ -95,9 +92,6 @@ class ManagerCashController extends Controller
 
         if($user) {
                 return view('admin.managercash', [
-                    'user' => $request->user()->userid,
-                    'photo' => $request->user()->photo,
-                    'level' => $request->user()->group_id,
                     'findlogin' => $user->userid,
                     'findcash' => $user->cash
                 ]);

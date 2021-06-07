@@ -16,23 +16,10 @@ class EventController extends Controller
 
         $rankingEvent = DB::select("SELECT c.name as char_name, c.eventos, g.name as guild_name FROM `char` AS c LEFT JOIN guild AS g ON c.char_id = g.char_id ORDER BY eventos DESC");
 
-        if(Auth::check()) {
             return view('rankings.event', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'rankingEvent' => $rankingEvent,
                 'n' => $n
             ]);
-        } else {
-            return view('rankings.event', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'rankingEvent' => $rankingEvent,
-                'n' => $n
-            ]);
-        }
 
     }
 }

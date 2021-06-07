@@ -20,9 +20,6 @@ class ManagerStaffController extends Controller
     public function index(Request $request)
     {
         return view('admin.managerstaff', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'findstaff' => null,
             'findlogin' => null
         ]);
@@ -118,9 +115,6 @@ class ManagerStaffController extends Controller
                 $staff = "Não faz parte da equipe.";
             }
             return view('admin.managerstaff', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'findlogin' => $user->userid,
                 'findstaff' => $staff
             ]);

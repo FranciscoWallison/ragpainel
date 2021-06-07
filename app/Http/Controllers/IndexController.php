@@ -31,7 +31,6 @@ class IndexController extends Controller
         $np = 0;
         $nw = 0;
         $nm = 0;
-        $level = 0;
 
         $topPVP = RankingPVP::select('char_name', 'total')->orderByDesc('total')->limit(3)->get();
 
@@ -39,23 +38,6 @@ class IndexController extends Controller
 
         $topMVP = Char::select('name', 'mvps')->orderByDesc('mvps')->limit(3)->get();
 
-        if(Auth::check()) {
-            return view('index', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'charsOnline' => $onlineCount,
-                'userCount' => $userCount,
-                'charCount' => $charCount,
-                'guildCount' => $guildCount,
-                'topPVP' => $topPVP,
-                'topGVG' => $topGVG,
-                'topMVP' => $topMVP,
-                'level' => $request->user()->group_id,
-                'np' => $np,
-                'nw' => $nw,
-                'nm' => $nm
-            ]);
-        } else {
             return view('index', [
                 'charsOnline' => $onlineCount,
                 'userCount' => $userCount,
@@ -64,12 +46,9 @@ class IndexController extends Controller
                 'topPVP' => $topPVP,
                 'topGVG' => $topGVG,
                 'topMVP' => $topMVP,
-                'level' => $level,
                 'np' => $np,
                 'nw' => $nw,
                 'nm' => $nm
             ]);
         }
-
-    }
 }

@@ -21,9 +21,6 @@ class ManagerVipController extends Controller
     public function index(Request $request)
     {
         return view('admin.managervip', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'findvip' => null,
             'findlogin' => null
         ]);
@@ -102,9 +99,6 @@ class ManagerVipController extends Controller
 
         if($user) {
             return view('admin.managervip', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'findlogin' => $user->userid,
                 'findvip' => intval($user->vip_time/864000)
             ]);

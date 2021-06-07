@@ -18,7 +18,6 @@ class LogsController extends Controller
 {
     public function index(Request $request)
     {
-
         // PVP LOGS.
         $pvplogs = DB::table('arena_pvp_logs')->select('ID', 'assassino', 'alvo', 'data')->orderByDesc('data')->get();
 
@@ -39,9 +38,6 @@ class LogsController extends Controller
         $dropslogs = DB::table('picklog')->select('id', 'time', 'nameid', 'amount')->orderByDesc('time')->get();
 
         return view('admin.logs', [
-        'user' => $request->user()->userid,
-        'photo' => $request->user()->photo,
-        'level' => $request->user()->group_id,
         'pvplogs' => $pvplogs,
         'commandslogs' => $commandslogs,
         'chatlogs' => $chatlogs,

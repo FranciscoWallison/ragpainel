@@ -180,8 +180,8 @@
                                                         <td>{{$loginlog->ip}}</td>
                                                         <td>{{$loginlog->user}}</td>
                                                         <td>{{$loginlog->log}}</td>
-                                                        <td>{{date('d-m-Y', strtotime($guildlog->time))}}</td>
-                                                        <td>{{date('H:m:i', strtotime($guildlog->time))}}</td>
+                                                        <td>{{date('d-m-Y', strtotime($loginlog->time))}}</td>
+                                                        <td>{{date('H:m:i', strtotime($loginlog->time))}}</td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>

@@ -25,22 +25,10 @@ class TicketsController extends Controller
 {
     public function index(Request $request)
     {
-        if(Auth::check()) {
+
             return view('tickets.index', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'email' => $request->user()->email,
-                'level' => $request->user()->group_id,
                 'categorys' => $this->category()
             ]);
-        } else {
-            return view('tickets.index', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'categorys' => $this->category()
-            ]);
-        }
     }
 
     public function category(){
@@ -84,14 +72,14 @@ class TicketsController extends Controller
         $ticket = new Ticket;
         $ticket->title = $request->title;
         $ticket->login = $request->user()->userid;
-        
+
         $ticket->email = $request->user()->email;
-       
+
         $ticket->body = nl2br($request->body);
         $ticket->category = $request->category;
-       
+
         $ticket->save();
-        
+
         return back()->with('custom_alert_success', 'Ticket enviado com sucesso.');
     }
 
@@ -104,10 +92,6 @@ class TicketsController extends Controller
         $tickets = Ticket::where('login', $request->user()->userid)->limit($limit)->offset(($page - 1) * $limit)->paginate();
 
         return view('tickets.mytickets', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'email' => $request->user()->email,
-            'level' => $request->user()->group_id,
             'tickets' => $tickets
         ]);
 
@@ -124,10 +108,6 @@ class TicketsController extends Controller
         }
 
         return view('tickets.ticketview', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'email' => $request->user()->email,
-            'level' => $request->user()->group_id,
             'replys' => $replys,
             'view' => $view,
 

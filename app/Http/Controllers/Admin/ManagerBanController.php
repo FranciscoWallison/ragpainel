@@ -21,9 +21,6 @@ class ManagerBanController extends Controller
     public function index(Request $request)
     {
         return view('admin.managerban', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'findban' => null,
             'findlogin' => null
         ]);
@@ -99,9 +96,6 @@ class ManagerBanController extends Controller
                 $status = "Conta Regular";
             }
             return view('admin.managerban', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'findlogin' => $user->userid,
                 'findban' => $status
             ]);
