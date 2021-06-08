@@ -13,7 +13,7 @@ class PVPController extends Controller
     {
         $n = 1;
 
-        $rankingPVP = RankingPVP::select('char_name', 'matou', 'morreu', 'total')->orderByDesc('total')->limit(50)->get();
+        $rankingPVP = RankingPVP::select('char_name', 'killed', 'died', 'point')->orderByDesc('point')->limit(50)->get();
 
             return view('rankings.pvp', [
                 'rankingPVP' => $rankingPVP,
