@@ -13,6 +13,8 @@ use App\Models\Guild;
 use App\Models\RankingPVP;
 use App\Models\RankingGVG;
 use App\Http\Controllers\Admin\ConfigController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewUser;
 
 class IndexController extends Controller
 {
