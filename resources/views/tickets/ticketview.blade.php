@@ -24,7 +24,7 @@
         <ul class="timeline timeline-simple">
             <li class="timeline-inverted">
                 <div class="ticket-photo success">
-                    <img src="{{asset('assets/img/users')}}/{{$photo}}" />
+                    <img src="{{asset('assets/img/users')}}/{{\Auth::user()->photo}}" />
                 </div>
                 <div class="timeline-panel">
                     <div class="timeline-heading">
