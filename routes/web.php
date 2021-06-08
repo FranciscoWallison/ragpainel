@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\Auth\RegisteredUserController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\User\Auth\PasswordResetLinkController;
+use App\Http\Controllers\User\Auth\NewPasswordController;
 use App\Http\Controllers\User\MyAccount;
 use App\Http\Controllers\User\MyChars;
 use App\Http\Controllers\Admin\LogsController;
@@ -41,6 +43,20 @@ Route::post('/register',[RegisteredUserController::class, 'register'])->name('us
 Route::get('/login',[AuthenticatedSessionController::class, 'index'])->name('user.index.login');
 Route::post('/login',[AuthenticatedSessionController::class, 'authenticate'])->name('user.login');
 Route::get('/logout',[AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('user.logout');
+
+// Reset Senha
+Route::get('/forgot-password', function () {
+    return view('user.reset-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->middleware('guest')->name('password.request.send');
+
+Route::get('/reset-password/{token}', function ($token) {
+    return view('user.change-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
+
 Route::get('/myaccount',[MyAccount::class, 'index'])->middleware('auth')->name('user.myaccount');
 Route::post('/myaccount',[MyAccount::class, 'update'])->middleware('auth')->name('user.myaccount.update');
 Route::post('/myaccount/upload',[MyAccount::class, 'uploadimg'])->middleware('auth')->name('user.myaccount.upload');

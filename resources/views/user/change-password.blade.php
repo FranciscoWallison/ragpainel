@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/aple-icon.png')}}" />
     <link rel="icon" type="image/png" href="{{asset('assets/img/favicon.ico')}}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>@lang('messages.1')</title>
+    <title>Definir Nova Senha</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -63,9 +63,9 @@
                             <div class="alert alert-danger">
                                 <span>
                                 {{ Session::get('custom_alert') }}
-                                @php
-                                    Session::forget('custom_alert');
-                                @endphp
+                                    @php
+                                        Session::forget('custom_alert');
+                                    @endphp
                                 </span>
                             </div>
                         </div>
@@ -91,56 +91,57 @@
 
                 @endif
 
-                @if (session('status'))
+
+                <div class="row">
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                        <p class="alert alert-success">{{ session('status') }}</p>
-                    </div>
-                @endif
+                        <form method="post" action="{{route('password.update')}}">
+                            @csrf
 
+                            <!-- Password Reset Token -->
+                                <input type="hidden" name="token" value="{{ $token }}">
 
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <form method="post" action="{{route('user.login')}}">
-                                @csrf
-                                <div class="card card-login card-hidden">
-                                    <div class="card-header text-center" data-background-color="purple">
-                                        <h4 class="card-title">Acessar sua conta</h4>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="input-group">
+                            <div class="card card-login card-hidden">
+                                <div class="card-header text-center" data-background-color="purple">
+                                    <h4 class="card-title">Alterar Senha</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="input-group">
                                             <span class="input-group-addon">
-                                                <i class="material-icons">account_box</i>
+                                                <i class="material-icons">email</i>
                                             </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Login</label>
-                                                <input type="text" name="userid" minlength="4" maxlength="10" class="form-control" required>
-                                            </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Seu e-mail</label>
+                                            <input type="email" name="email" class="form-control" required>
                                         </div>
-                                        <div class="input-group">
+                                    </div>
+                                    <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="material-icons">lock_outline</i>
                                             </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Senha</label>
-                                                <input type="password" name="password" minlength="8" class="form-control" required>
-                                            </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Nova Senha</label>
+                                            <input type="password" name="password" minlength="8" class="form-control" required>
                                         </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="remember" id="remember"> <span>Lembrar-me</span>
-                                            </label>
-                                        </div>
-                                        <p class="text-center">Esqueceu sua senha? <a href="{{route('password.request')}}">Clique aqui</a></p>
-                                        <p class="text-center">Não possui conta? <a href="{{route('user.register')}}">Clique aqui</a></p>
+                                    </div>
 
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">lock_outline</i>
+                                            </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Repita a Senha</label>
+                                            <input type="password" name="password_confirmation" minlength="8" class="form-control" required>
+                                        </div>
                                     </div>
-                                    <div class="footer text-center">
-                                        <button type="submit" class="btn btn-primary">Entrar</button>
-                                    </div>
+
                                 </div>
-                            </form>
-                        </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                </div>
             </div>
         </div>
 
