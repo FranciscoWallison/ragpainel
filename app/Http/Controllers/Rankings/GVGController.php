@@ -13,7 +13,7 @@ class GVGController extends Controller
     {
         $n = 1;
 
-        $rankingGVG = RankingGVG::select('guild_name', 'matou', 'morreu', 'total')->orderByDesc('total')->limit(50)->get();
+        $rankingGVG = RankingGVG::select('guild_name', 'killed', 'died', 'point')->orderByDesc('point')->limit(50)->get();
 
             return view('rankings.gvg', [
                 'rankingGVG' => $rankingGVG,
