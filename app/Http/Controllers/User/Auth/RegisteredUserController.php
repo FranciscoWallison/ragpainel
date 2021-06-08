@@ -55,7 +55,15 @@ class RegisteredUserController extends Controller
         $user->save();
 
         Auth::login($user);
-        Mail::to(\Auth::user()->email)->send(new NewUser(\Auth::user()));
+        event(new Registered($user));
+        //Mail::to(\Auth::user()->email)->send(new NewUser(\Auth::user()));
         return redirect()->route('index');
+    }
+
+    public function verification(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('custom_alert', 'Um novo link de verificação foi enviado para o endereço de e-mail fornecido durante o registro!');
     }
 }

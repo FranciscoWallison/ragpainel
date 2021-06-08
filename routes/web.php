@@ -22,6 +22,8 @@ use App\Http\Controllers\Database\DatabaseController;
 use App\Http\Controllers\Tickets\TicketsController;
 use App\Http\Controllers\Admin\ManagerTicketController;
 use App\Http\Controllers\Admin\ConfigController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,14 +37,14 @@ use App\Http\Controllers\Admin\ConfigController;
 */
 
 // Página inicial
-Route::get('/',[IndexController::class, 'index'])->name('index');
+Route::get('/',[IndexController::class, 'index'])->middleware('verified')->name('index');
 
 // Usuário.
 Route::get('/register',[RegisteredUserController::class, 'index'])->name('user.index.register');
 Route::post('/register',[RegisteredUserController::class, 'register'])->name('user.register');
 Route::get('/login',[AuthenticatedSessionController::class, 'index'])->name('user.index.login');
 Route::post('/login',[AuthenticatedSessionController::class, 'authenticate'])->name('user.login');
-Route::get('/logout',[AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('user.logout');
+Route::match(['post', 'get'],'/logout',[AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('user.logout');
 
 // Reset Senha
 Route::get('/forgot-password', function () {
@@ -57,7 +59,20 @@ Route::get('/reset-password/{token}', function ($token) {
 
 Route::post('/reset-password', [NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
 
-Route::get('/myaccount',[MyAccount::class, 'index'])->middleware('auth')->name('user.myaccount');
+// Verificação de E-mail
+
+Route::get('/email/verify', function () {
+    return view('user.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return route('index');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', [RegisteredUserController::class, 'verification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/myaccount',[MyAccount::class, 'index'])->middleware('auth', 'verified')->name('user.myaccount');
 Route::post('/myaccount',[MyAccount::class, 'update'])->middleware('auth')->name('user.myaccount.update');
 Route::post('/myaccount/upload',[MyAccount::class, 'uploadimg'])->middleware('auth')->name('user.myaccount.upload');
 Route::get('/mychars',[MyChars::class, 'index'])->middleware('auth')->name('user.mychars');
