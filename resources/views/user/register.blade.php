@@ -122,6 +122,8 @@
                                         </div>
                                     </div>
 
+                                    <p class="text-center">Já possui conta? <a href="{{route('user.login')}}">Clique aqui</a></p>
+
                                 </div>
                                 <div class="footer text-center">
                                     <button type="submit" class="btn btn-primary">Registrar</button>
