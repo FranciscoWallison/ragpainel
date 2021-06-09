@@ -67,7 +67,7 @@ RagPainel - É um painel de controle desenvolvido para gerenciar contas e person
   - [x] Visualizar quantidade de dias vip.
   - [x] Visualizar quantidade de créditos.
   - [x] Esqueceu sua senha
-  - [ ] Esqueceu seu login
+  - [x] Esqueceu seu login
 
 - [x] Administrador
   - [x] Visualizar Logs
@@ -129,10 +129,6 @@ RagPainel - É um painel de controle desenvolvido para gerenciar contas e person
 - [x] Suporte
   - [x] Criar Ticket
   - [x] Visualizar Tickets
-
-- [ ] Doações
-  - [ ] Fazer Doação
-  - [ ] Consultar Doações
 
 ---
 
