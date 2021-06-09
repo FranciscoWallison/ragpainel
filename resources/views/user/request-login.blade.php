@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/aple-icon.png')}}" />
     <link rel="icon" type="image/png" href="{{asset('assets/img/favicon.ico')}}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>@lang('messages.1')</title>
+    <title>Recuperação de Login</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -57,21 +57,6 @@
         <div class="content">
             <div class="container">
 
-                @if(Session::has('custom_alert'))
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <div class="alert alert-danger">
-                                <span>
-                                {{ Session::get('custom_alert') }}
-                                @php
-                                    Session::forget('custom_alert');
-                                @endphp
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-
                 @if($errors->any())
 
                     <div class="row">
@@ -91,57 +76,63 @@
 
                 @endif
 
-                @if (session('status'))
-                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                        <p class="alert alert-success">{{ session('status') }}</p>
-                    </div>
-                @endif
-
-
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <form method="post" action="{{route('user.login')}}">
-                                @csrf
-                                <div class="card card-login card-hidden">
-                                    <div class="card-header text-center" data-background-color="purple">
-                                        <h4 class="card-title">Acessar sua conta</h4>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">account_box</i>
-                                            </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Login</label>
-                                                <input type="text" name="userid" minlength="4" maxlength="10" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">lock_outline</i>
-                                            </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Senha</label>
-                                                <input type="password" name="password" minlength="8" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="remember" id="remember"> <span>Lembrar-me</span>
-                                            </label>
-                                        </div>
-                                        <p class="text-center">Esqueceu sua senha? <a href="{{route('password.request')}}">Clique aqui</a></p>
-                                        <p class="text-center">Esqueceu seu login? <a href="{{route('user.request.login')}}">Clique aqui</a></p>
-                                        <p class="text-center">Não possui conta? <a href="{{route('user.register')}}">Clique aqui</a></p>
-
-                                    </div>
-                                    <div class="footer text-center">
-                                        <button type="submit" class="btn btn-primary">Entrar</button>
-                                    </div>
+                    @if(Session::has('alert'))
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                                <div class="alert alert-danger">
+                                <span>
+                                {{ Session::get('alert') }}
+                                    @php
+                                        Session::forget('alert');
+                                    @endphp
+                                </span>
                                 </div>
-                            </form>
+                            </div>
                         </div>
+                    @endif
+
+                    @if(Session::has('success'))
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                                <div class="alert alert-success">
+                                <span>
+                                {{ Session::get('success') }}
+                                    @php
+                                        Session::forget('success');
+                                    @endphp
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                        <form method="post" action="{{route('user.request.login.send')}}">
+                            @csrf
+                            <div class="card card-login card-hidden">
+                                <div class="card-header text-center" data-background-color="purple">
+                                    <h4 class="card-title">Recuperação de Login</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">mail</i>
+                                            </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">E-mail</label>
+                                            <input type="mail" name="email" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-primary">Solicitar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                </div>
             </div>
         </div>
 

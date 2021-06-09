@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ManagerTicketController;
 use App\Http\Controllers\Admin\ConfigController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\User\Auth\RequestLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +60,11 @@ Route::get('/reset-password/{token}', function ($token) {
 
 Route::post('/reset-password', [NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
 
-// Verificação de E-mail
+// Verificação de Login
+Route::get('/request-login',[RequestLoginController::class, 'index'])->name('user.request.login');
+Route::post('/request-login',[RequestLoginController::class, 'send'])->name('user.request.login.send');
 
+// Recuperação de Login
 Route::get('/email/verify', function () {
     return view('user.verify-email');
 })->middleware('auth')->name('verification.notice');
