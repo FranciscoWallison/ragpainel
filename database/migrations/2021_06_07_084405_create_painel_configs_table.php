@@ -76,6 +76,16 @@ class CreatePainelConfigsTable extends Migration
         $config->content = 20;
         $config->save();
 
+        $config = new Config();
+        $config->name = 'notify_register';
+        $config->content = 'on';
+        $config->save();
+
+        $config = new Config();
+        $config->name = 'verify_register';
+        $config->content = 'on';
+        $config->save();
+
     }
 
     /**

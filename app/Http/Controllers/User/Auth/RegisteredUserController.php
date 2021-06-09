@@ -55,8 +55,14 @@ class RegisteredUserController extends Controller
         $user->save();
 
         Auth::login($user);
-        event(new Registered($user));
-        //Mail::to(\Auth::user()->email)->send(new NewUser(\Auth::user()));
+
+        if($configs['verify_register'] == 'on') {
+            event(new Registered($user));
+        }
+
+        if($configs['notify_register'] == 'on') {
+            Mail::to(\Auth::user()->email)->send(new NewUser(\Auth::user()));
+        }
         return redirect()->route('index');
     }
 

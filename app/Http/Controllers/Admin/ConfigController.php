@@ -63,6 +63,29 @@ class ConfigController extends Controller
         return back()->with('custom_alert_success', 'Configurações atualizadas com sucesso.');
     }
 
+    public function saveAccount(Request $request)
+    {
+
+        if($request->input('notify_register'))
+        {
+            $notify_register = 'on';
+        } else {
+            $notify_register = 'off';
+        }
+
+        if($request->input('verify_register'))
+        {
+            $verify_register = 'on';
+        } else {
+            $verify_register = 'off';
+        }
+
+        Config::where('name', 'verify_register')->update(['content' => $verify_register]);
+        Config::where('name', 'notify_register')->update(['content' => $notify_register]);
+
+        return back()->with('custom_alert_success', 'Configurações atualizadas com sucesso.');
+    }
+
     public function saveColor(Request $request)
     {
 

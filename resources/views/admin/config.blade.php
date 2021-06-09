@@ -112,6 +112,48 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="purple">
+                        <i class="material-icons">account_box</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Configurações de Conta
+                        </h4>
+                        <form method="post" action="{{route('admin.config.saveaccount')}}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="togglebutton">
+                                                <label>
+                                                    <input type="checkbox" name="notify_register" @if($configs['notify_register'] == 'on') checked @endif> <span class="text_config">Ativar notificação para o jogador quando realizar um registro.</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="togglebutton">
+                                                <label>
+                                                    <input type="checkbox" name="verify_register" @if($configs['verify_register'] == 'on') checked @endif> <span class="text_config">Ativar confirmação de e-mail para completar o registro.</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary pull-right">Salvar</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
                     <div class="card-header card-header-icon" data-background-color="orange">
                         <i class="material-icons">palette</i>
                     </div>

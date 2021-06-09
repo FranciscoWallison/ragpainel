@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Página inicial
-Route::get('/',[IndexController::class, 'index'])->middleware('verified')->name('index');
+Route::get('/',[IndexController::class, 'index'])->middleware('verify')->name('index');
 
 // Usuário.
 Route::get('/register',[RegisteredUserController::class, 'index'])->name('user.index.register');
@@ -67,7 +67,7 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return route('index');
+    return view('user.login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', [RegisteredUserController::class, 'verification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
@@ -131,6 +131,7 @@ Route::post('/admin/managertickets/reply', [ManagerTicketController::class, 'rep
 // Configurações do Painel
 Route::get('/admin/configs',[ConfigController::class, 'index'])->middleware('auth', 'admin')->name('admin.config');
 Route::post('/admin/configs/savegeneral',[ConfigController::class, 'saveGeneral'])->middleware('auth', 'admin')->name('admin.config.savegeneral');
+Route::post('/admin/configs/saveaccount',[ConfigController::class, 'saveAccount'])->middleware('auth', 'admin')->name('admin.config.saveaccount');
 Route::post('/admin/configs/savecolor',[ConfigController::class, 'saveColor'])->middleware('auth', 'admin')->name('admin.config.savecolor');
 Route::post('/admin/configs/savecolorbg',[ConfigController::class, 'saveColorBg'])->middleware('auth', 'admin')->name('admin.config.savecolorbg');
 Route::post('/admin/configs/savevip',[ConfigController::class, 'saveVip'])->middleware('auth', 'admin')->name('admin.config.savevip');
