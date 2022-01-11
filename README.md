@@ -66,8 +66,8 @@ RagPainel - É um painel de controle desenvolvido para gerenciar contas e person
   - [x] Visualizar último ip acessado.
   - [x] Visualizar quantidade de dias vip.
   - [x] Visualizar quantidade de créditos.
-  - [ ] Esqueceu sua senha
-  - [ ] Esqueceu seu login
+  - [x] Esqueceu sua senha
+  - [x] Esqueceu seu login
 
 - [x] Administrador
   - [x] Visualizar Logs
@@ -129,10 +129,6 @@ RagPainel - É um painel de controle desenvolvido para gerenciar contas e person
 - [x] Suporte
   - [x] Criar Ticket
   - [x] Visualizar Tickets
-
-- [ ] Doações
-  - [ ] Fazer Doação
-  - [ ] Consultar Doações
 
 ---
 
@@ -204,15 +200,26 @@ $ git clone https://github.com/rscodexx/ragpainel.git
 
 # Renomeie o arquivo .env-example(está na pasta raiz do projeto) para .env e configure.
 
+APP_NAME=Laravel #Nome do seu servidor
+APP_URL=http://localhost/ragpainel/public/ # Url do seu servidor
+
 DB_CONNECTION=mysql #Tipo de banco de dados.
 DB_HOST=127.0.0.1 #IP do banco de dados.
 DB_PORT=3306 #Porta do banco de dados.
-DB_DATABASE=ragpainel #Tabela do banco de dados.
+DB_DATABASE=ragarok #Tabela do banco de dados.
 DB_USERNAME=ragnarok #Usuário do banco de dados
 DB_PASSWORD=ragnarok #Senha do banco de dados.
 TIMEZONE=America/Sao_Paulo #Horário
 LOCALE=pt-BR #Idioma geral.
 FALLBACK_LOCALE=pt-BR #Idioma das mensagens de erro.
+
+MAIL_MAILER=smtp #Tipo de e-mail
+MAIL_HOST=mailhog #Host do e-mail
+MAIL_PORT=1025 # Porta do e-mail
+MAIL_USERNAME=null #Seu e-mail
+MAIL_PASSWORD=null #Senha do seu e-mail
+MAIL_ENCRYPTION=null # Tipo de encriptação do e-mail.
+MAIL_FROM_NAME="${APP_NAME}"
 
 # Acesse a pasta do projeto em seu terminal/cmd
 $ cd ragpainel
@@ -222,7 +229,7 @@ $ composer install
 
 # Aguarde a instalação.
 
-# Instale as tabelas do painel, ainda com cmd aberto no diretório do projeto utilize:
+# Instale todas tabelas do painel, ainda com cmd aberto no diretório do projeto utilize:
 $ php artisan migrate
 
 # Pronto, o seu servidor está instalado e configurado.

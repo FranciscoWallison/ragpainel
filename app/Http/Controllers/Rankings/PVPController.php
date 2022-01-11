@@ -13,25 +13,11 @@ class PVPController extends Controller
     {
         $n = 1;
 
-        $rankingPVP = RankingPVP::select('char_name', 'matou', 'morreu', 'total')->orderByDesc('total')->limit(50)->get();
+        $rankingPVP = RankingPVP::select('char_name', 'killed', 'died', 'point')->orderByDesc('point')->limit(50)->get();
 
-        if(Auth::check()) {
             return view('rankings.pvp', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'rankingPVP' => $rankingPVP,
                 'n' => $n
             ]);
-        } else {
-            return view('rankings.pvp', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'rankingPVP' => $rankingPVP,
-                'n' => $n
-            ]);
-        }
-
     }
 }

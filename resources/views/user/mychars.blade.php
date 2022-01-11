@@ -20,6 +20,16 @@
         </div>
     @endif
 
+    @empty($chars)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <span>Nenhum Personagem Encontrado</span>
+                </div>
+            </div>
+        </div>
+    @endempty
+
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12">
@@ -35,6 +45,7 @@
                                 <thead class="text-primary">
                                 <th>Nome</th>
                                 <th>Level</th>
+                                <th>Classe</th>
                                 <th>Mapa</th>
                                 <th>Clãn</th>
                                 <th>Ações</th>
@@ -45,8 +56,9 @@
 
                                     <td>{{$char->char_name}}</td>
                                     <td>{{$char->base_level}}/{{$char->job_level}}</td>
+                                    <td>{{$job[$char->class]}}</td>
                                     <td>{{$char->last_map}}</td>
-                                    <td>{{$char->guild_name}}</td>
+                                    <td>@empty($char->guild_name) Nenhum @else{{$char->guild_name}} @endempty</td>
                                     <td>
 
                                         <form class="form-inline" action="{{route('user.resetposition', ['id' => $char->charid])}}" method="post">

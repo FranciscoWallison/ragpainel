@@ -12,27 +12,32 @@
         <div class="card-content">
             <h4 class="card-title">TOP <b>50</b> melhores clãns da guerra do emperium</h4>
             <div class="table-responsive tablecenter color-{{$configs['color']}}">
-                <table class="table">
-                    <thead class="text-primary">
-                    <th>Posição</th>
-                    <th>Clãn</th>
-                    <th>Matou</th>
-                    <th>Morreu</th>
-                    <th>Pontos</th>
-                    </thead>
-                    <tbody>
-                    @foreach($rankingGVG as $data)
-                    <tr>
-                        <td>{{$n}}</td>
-                        <td>{{$data->guild_name}}</td>
-                        <td>{{$data->matou}}</td>
-                        <td>{{$data->morreu}}</td>
-                        <td class="text-primary">{{$data->total}}</td>
-                    </tr>
-                    @php $n++; @endphp
-                    @endforeach
-                    </tbody>
-                </table>
+                @if(count($rankingGVG) == 0)
+                    <p class="justify-content: text-center">Nenhum jogador encontrado.</p>
+                @else
+                    <table class="table">
+                        <thead class="text-primary">
+                        <th>Posição</th>
+                        <th>Clãn</th>
+                        <th>Matou</th>
+                        <th>Morreu</th>
+                        <th>Pontos</th>
+                        </thead>
+                        <tbody>
+
+                        @foreach($rankingGVG as $data)
+                        <tr>
+                            <td>{{$n}}</td>
+                            <td>{{$data->guild_name}}</td>
+                            <td>{{$data->killed}}</td>
+                            <td>{{$data->died}}</td>
+                            <td class="text-primary">{{$data->point}}</td>
+                        </tr>
+                        @php $n++; @endphp
+                        @endforeach
+                        </tbody>
+                    </table>
+                @endif
             </div>
         </div>
     </div>

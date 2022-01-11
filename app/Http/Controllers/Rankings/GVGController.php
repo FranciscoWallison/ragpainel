@@ -13,25 +13,11 @@ class GVGController extends Controller
     {
         $n = 1;
 
-        $rankingGVG = RankingGVG::select('guild_name', 'matou', 'morreu', 'total')->orderByDesc('total')->limit(50)->get();
+        $rankingGVG = RankingGVG::select('guild_name', 'killed', 'died', 'point')->orderByDesc('point')->limit(50)->get();
 
-        if(Auth::check()) {
             return view('rankings.gvg', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'rankingGVG' => $rankingGVG,
                 'n' => $n
             ]);
-        } else {
-            return view('rankings.gvg', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'rankingGVG' => $rankingGVG,
-                'n' => $n
-            ]);
-        }
-
     }
 }

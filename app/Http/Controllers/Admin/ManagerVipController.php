@@ -21,9 +21,6 @@ class ManagerVipController extends Controller
     public function index(Request $request)
     {
         return view('admin.managervip', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'findvip' => null,
             'findlogin' => null
         ]);
@@ -74,7 +71,7 @@ class ManagerVipController extends Controller
         $user = User::where('userid', $request->input('login'))->first();
 
         if($user) {
-            $user->vip_time -= $request->vipremove*86400000;
+            $user->vip_time -= $request->vipremove*864000;
             if($user->vip_time <= 1){
                 $user->group_id = 0;
             }
@@ -102,9 +99,6 @@ class ManagerVipController extends Controller
 
         if($user) {
             return view('admin.managervip', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'findlogin' => $user->userid,
                 'findvip' => intval($user->vip_time/864000)
             ]);

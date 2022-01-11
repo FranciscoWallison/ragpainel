@@ -28,9 +28,6 @@ class ManagerTicketController extends Controller
         $ticketsatt = Ticket::select()->where('status', "Atendimento")->get();
 
         return view('admin.managerticket', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'ticketsOpen' => $ticketsOpen,
             'ticketsclose' => $ticketsclose,
             'ticketsatt' => $ticketsatt
@@ -44,9 +41,6 @@ class ManagerTicketController extends Controller
         $replys = DB::select("SELECT l.photo, t.ticket_id, t.login as ticket_login, t.body, t.created_at, t.updated_at FROM `login` AS l LEFT JOIN tickets_replys AS t ON l.userid = t.login  WHERE t.ticket_id=$id ORDER BY created_at ASC");
 
         return view('admin.managerticketview', [
-            'user' => $request->user()->userid,
-            'photo' => $request->user()->photo,
-            'level' => $request->user()->group_id,
             'ticket' => $ticket,
             'replys' => $replys
         ]);

@@ -92,10 +92,13 @@
                         <tr>
                             <td><img src="assets/img/top/{{$np}}.png"></td>
                             <td>{{$top->char_name}}</td>
-                            <td>{{$top->total}}</td>
+                            <td>{{$top->point}}</td>
                             @php $np++; @endphp
                         </tr>
                         @endforeach
+                        @if($np == null)
+                            <tr><td colspan="4">Nenhum Jogador Encontrado</td></tr>
+                        @endempty
 
                     </tbody>
                 </table>
@@ -121,10 +124,13 @@
                         <tr>
                             <td><img src="assets/img/top/{{$nw}}.png"></td>
                             <td>{{$top->guild_name}}</td>
-                            <td>{{$top->total}}</td>
+                            <td>{{$top->point}}</td>
                             @php $nw++; @endphp
                         </tr>
                     @endforeach
+                    @if($nw == null)
+                        <tr><td colspan="4">Nenhum Jogador Encontrado</td></tr>
+                    @endempty
                     </tbody>
                 </table>
             </div>
@@ -153,6 +159,9 @@
                             @php $nm++; @endphp
                         </tr>
                     @endforeach
+                    @if($nm == null)
+                        <tr><td colspan="4">Nenhum Jogador Encontrado</td></tr>
+                    @endempty
                     </tbody>
                 </table>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
@@ -53,6 +55,21 @@ class RegisteredUserController extends Controller
         $user->save();
 
         Auth::login($user);
+
+        if($configs['verify_register'] == 'on') {
+            event(new Registered($user));
+        }
+
+        if($configs['notify_register'] == 'on') {
+            Mail::to(\Auth::user()->email)->send(new NewUser(\Auth::user()));
+        }
         return redirect()->route('index');
+    }
+
+    public function verification(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('custom_alert', 'Um novo link de verificação foi enviado para o endereço de e-mail fornecido durante o registro!');
     }
 }

@@ -13,6 +13,7 @@ use App\Models\Guild;
 use App\Models\RankingPVP;
 use App\Models\RankingGVG;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Contracts\DataTable;
 use App\Models\Item;
@@ -22,31 +23,17 @@ class DatabaseController extends Controller
 {
     public function item(Request $request)
     {
-
-        $page = $request->has('page') ? $request->get('page') : 1;
-        $limit = $request->has('limit') ? $request->get('limit') : 10;
-
-        $itens = Item::limit($limit)->offset(($page - 1) * $limit)->paginate();
-
-        if(Auth::check()) {
-            return view('database.item', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
-                'type_itens' => $this->type(),
-                'equipIn' => $this->equip(),
-                'itens' => $itens
-            ]);
+        if(Schema::hasTable('item_db')) {
+            $itens = Item::paginate();
         } else {
+            $itens = [];
+        }
+
             return view('database.item', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
                 'type_itens' => $this->type(),
                 'equipIn' => $this->equip(),
                 'itens' => $itens
             ]);
-        }
 
     }
 
@@ -62,31 +49,18 @@ class DatabaseController extends Controller
                 ->withInput();
         }
 
-            $name = Item::where('name_japanese', 'like', '%' .$request->input('itemSearch') . '%')->paginate();
+            $name = Item::where('name_japanese', 'LIKE', '%' .$request->input('itemSearch'). '%')
+            ->orWhere('id', 'LIKE', '%' .$request->input('itemSearch') . '%')->paginate();
 
             if($name){
                 $find = $name;
             }
 
-            if (Auth::check()) {
                 return view('database.item', [
-                    'user' => $request->user()->userid,
-                    'photo' => $request->user()->photo,
-                    'level' => $request->user()->group_id,
                     'type_itens' => $this->type(),
                     'equipIn' => $this->equip(),
                     'itens' => $find,
                 ]);
-            } else {
-                return view('database.item', [
-                    'user' => null,
-                    'photo' => null,
-                    'level' => null,
-                    'type_itens' => $this->type(),
-                    'equipIn' => $this->equip(),
-                    'itens' => $find
-                ]);
-            }
 
     }
 
@@ -146,34 +120,17 @@ class DatabaseController extends Controller
     public function monster(Request $request)
     {
 
-        $page = $request->has('page') ? $request->get('page') : 1;
-        $limit = $request->has('limit') ? $request->get('limit') : 10;
-
-        $monsters = Monster::limit($limit)->offset(($page - 1) * $limit)->paginate();
-
-        if(Auth::check()) {
-            return view('database.monster', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
-                'monster_size' => $this->size(),
-                'monster_element' => $this->element(),
-                'monster_race' => $this->race(),
-                'monsters' => $monsters,
-            ]);
+        if(Schema::hasTable('mob_db')) {
+            $monsters = Monster::paginate();
         } else {
+            $monsters = [];
+        }
             return view('database.monster', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'type_itens' => $this->type(),
                 'monster_size' => $this->size(),
                 'monster_element' => $this->element(),
                 'monster_race' => $this->race(),
                 'monsters' => $monsters,
             ]);
-        }
-
     }
 
     public function size(){
@@ -234,33 +191,15 @@ class DatabaseController extends Controller
                 ->withInput();
         }
 
-        $name = Monster::where('iName', 'like', '%' .$request->input('monsterSearch') . '%')->paginate();
+        $name = Monster::where('iName', 'LIKE', '%' .$request->input('monsterSearch'). '%')
+            ->orWhere('id', 'LIKE', '%' .$request->input('monsterSearch'). '%')->paginate();
 
-        if($name){
-            $find = $name;
-        }
-
-        if (Auth::check()) {
             return view('database.monster', [
-                'user' => $request->user()->userid,
-                'photo' => $request->user()->photo,
-                'level' => $request->user()->group_id,
                 'monster_size' => $this->size(),
                 'monster_element' => $this->element(),
                 'monster_race' => $this->race(),
-                'monsters' => $find,
+                'monsters' => $name,
             ]);
-        } else {
-            return view('database.monster', [
-                'user' => null,
-                'photo' => null,
-                'level' => null,
-                'monster_size' => $this->size(),
-                'monster_element' => $this->element(),
-                'monster_race' => $this->race(),
-                'monsters' => $find
-            ]);
-        }
 
     }
 }

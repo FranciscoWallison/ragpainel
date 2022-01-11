@@ -91,6 +91,12 @@
 
                 @endif
 
+                @if (session('status'))
+                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                        <p class="alert alert-success">{{ session('status') }}</p>
+                    </div>
+                @endif
+
 
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
@@ -124,6 +130,9 @@
                                                 <input type="checkbox" name="remember" id="remember"> <span>Lembrar-me</span>
                                             </label>
                                         </div>
+                                        <p class="text-center">Esqueceu sua senha? <a href="{{route('password.request')}}">Clique aqui</a></p>
+                                        <p class="text-center">Esqueceu seu login? <a href="{{route('user.request.login')}}">Clique aqui</a></p>
+                                        <p class="text-center">Não possui conta? <a href="{{route('user.register')}}">Clique aqui</a></p>
 
                                     </div>
                                     <div class="footer text-center">

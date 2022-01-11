@@ -11801,6 +11801,14 @@ input[type="file"] {
     padding: 0 0 20px 5%;
 }
 
+.text_config{
+    color: #333333;
+}
+
+.text_config:hover{
+    color: purple;
+}
+
 @media screen and (max-width: 767px) {
     .ticket-photo img {
         width: 50px;
